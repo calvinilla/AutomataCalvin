@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Scientific Number Checker</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+      h1 {
+        margin-bottom: 20px;
+      }
+      #container {
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      label {
+        font-size: 18px;
+        margin-bottom: 10px;
+        display: block;
+      }
+      input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+      }
+      button {
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        border-radius: 4px;
+      }
+      button:hover {
+        background-color: #45a049;
+      }
+      #result {
+        margin-top: 20px;
+        font-size: 20px;
+      }
+      .valid {
+        color: green;
+      }
+      .invalid {
+        color: red;
+      }
+      footer {
+        margin-top: 20px;
+        font-size: 14px;
+        color: #888;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <h1>Scientific Number Checker</h1>
+      <p>Enter a number in scientific notation to check if it's valid</p>
+      <form id="numberForm">
+        <label for="numberInput">Scientific Number :</label>
+        <input
+          type="text"
+          id="numberInput"
+          name="numberInput"
+          placeholder="e.g., 1.23e4"
+        />
+        <button type="button" onclick="checkScientificNumber()">Check</button>
+      </form>
+      <div id="result"></div>
+    </div>
+
+    <footer>
+      <p>Created by Calvin Valentino Illa</p>
+      <p>221011060034</p>
+    </footer>
+
+    <script>
+      function checkScientificNumber() {
+        var input = document.getElementById("numberInput").value.trim();
+        var resultDiv = document.getElementById("result");
+
+        // Validasi input
+        if (input === "") {
+          resultDiv.innerHTML =
+            "<span class='invalid'>Please enter a number.</span>";
+          return;
+        }
+
+        var isValid = isScientificNumber(input);
+
+        if (isValid) {
+          resultDiv.innerHTML =
+            "<span class='valid'>Valid scientific number</span>";
+        } else {
+          resultDiv.innerHTML =
+            "<span class='invalid'>Not a valid scientific number</span>";
+        }
+      }
+
+      function isScientificNumber(input) {
+        // Regex untuk mencocokkan format scientific number
+        var scientificPattern = /^[1-9](\.\d+)?[eE][+\-]?\d+$/;
+        // Mencocokkan input dengan pola scientific number
+        return scientificPattern.test(input);
+      }
+    </script>
+  </body>
+</html>
